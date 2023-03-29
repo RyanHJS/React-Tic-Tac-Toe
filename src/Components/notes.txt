@@ -1,0 +1,24 @@
+Components:
+
+Board > Square
+
+Game > CalcuateWinner
+
+Squre: setValue
+value: X or O or null
+onClick: X or O or no effect if square has already been clicked
+
+Board: currentMoves, ifXIsnext
+9 squares
+Value: Keep the square's state (dictionary): null / X / O
+setValue: Change the square's value to X or O 
+
+ifXIsNext > currentMoves
+    X will always go first, and take moves 1,3,5,7,9
+    O will always go second, and take moves 2,4,6,8
+
+Game:
+currentMoves: counter that starts at 1
+ifXIsnext: determine if currnetMove is even or odd
+    odd: X
+    even: O
