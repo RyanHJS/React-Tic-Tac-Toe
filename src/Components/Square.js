@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Square = ({ value, handleClick }) => {
     return (
@@ -7,7 +7,7 @@ const Square = ({ value, handleClick }) => {
                 {value}
             </button>
         </>
-    )
-}
+    );
+};
 
-export default Square
+export default Square;

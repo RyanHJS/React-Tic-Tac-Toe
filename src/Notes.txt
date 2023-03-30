@@ -1,0 +1,27 @@
+-------------------------------- Components --------------------------------
+Board {'>'} Square
+Game {'>'} CalcuateWinner
+
+Squre: setValue
+value: X or O or null
+onClick: X or O or no effect if square has already been clicked
+
+Board: currentMoves, ifXIsnext, square, setSquare
+handleClick: Change the square's value to X or O
+
+Game:
+square: an array of size 9 that represent 9 squares
+setSquare: take input from histroy at a certain index
+currentMove: counter that starts at 1
+setCurrentMove: set the current move
+ifXIsnext: determine if currnetMove is even or odd:
+    X will always go first, and take moves 1,3,5,7,9
+    O will always go second, and take moves 2,4,6,8 
+history: an array that keeps appending more arrays that represent board states (array of arrays)
+            the board state at a specific move is stored as history[0...8]
+setHistory: to restart the game, set history 
+    to be array that contains a blank array of size 9 to represent a clean board
+
+-------------------------------- Want to implement --------------------------------
+History:
+Display a list of past moves that is represented by the current board useState

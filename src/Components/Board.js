@@ -1,24 +1,25 @@
-import React, { useState } from 'react'
-import Square from './Square'
+import React, { useState } from 'react';
+import Square from './Square';
 
-const Board = ({ square, xIsNext, currentMove, setCurrentMove }) => {
+const Board = ({ squares, xIsNext, updateGame }) => {
 
     const handleClick = (i) => {
-        if (square[i] || calculateWinner(square)) {
-            return
+        if (squares[i] || calculateWinner(squares)) {
+            return;
         }
+
+        const nextSquares = squares.slice();
 
         if (xIsNext) {
-            square[i] = "X"
-            setCurrentMove(currentMove + 1)
+            nextSquares[i] = "X";
         }
         else {
-            square[i] = "O"
-            setCurrentMove(currentMove + 1)
+            nextSquares[i] = "O";
         }
-    }
+        updateGame(nextSquares);
+    };
 
-    const calculateWinner = (square) => {
+    const calculateWinner = (squares) => {
 
         const winConditions = [
             [0, 1, 2],
@@ -33,33 +34,43 @@ const Board = ({ square, xIsNext, currentMove, setCurrentMove }) => {
 
         for (let i = 0; i < winConditions.length; i++) {
             const [a, b, c] = winConditions[i];
-            if (square[a] && square[a] === square[b] && square[a] === square[c]) {
-                return square[a];
+            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                return squares[a];
             }
         }
         return null;
+    };
+
+    const winner = calculateWinner(squares);
+    let status;
+    if (winner) {
+        status = "Winner: " + winner;
+    }
+    else {
+        status = "Next player: " + (xIsNext ? "X" : "O");
     }
 
     return (
         <>
+            <div className="status">{status}</div>
             <div className="board-row">
-                <Square value={square[0]} handleClick={() => handleClick(0)} />
-                <Square value={square[1]} handleClick={() => handleClick(1)} />
-                <Square value={square[2]} handleClick={() => handleClick(2)} />
+                <Square value={squares[0]} handleClick={() => handleClick(0)} />
+                <Square value={squares[1]} handleClick={() => handleClick(1)} />
+                <Square value={squares[2]} handleClick={() => handleClick(2)} />
             </div>
             <div className="board-row">
-                <Square value={square[3]} handleClick={() => handleClick(3)} />
-                <Square value={square[4]} handleClick={() => handleClick(4)} />
-                <Square value={square[5]} handleClick={() => handleClick(5)} />
+                <Square value={squares[3]} handleClick={() => handleClick(3)} />
+                <Square value={squares[4]} handleClick={() => handleClick(4)} />
+                <Square value={squares[5]} handleClick={() => handleClick(5)} />
             </div>
             <div className="board-row">
-                <Square value={square[6]} handleClick={() => handleClick(6)} />
-                <Square value={square[7]} handleClick={() => handleClick(7)} />
-                <Square value={square[8]} handleClick={() => handleClick(8)} />
+                <Square value={squares[6]} handleClick={() => handleClick(6)} />
+                <Square value={squares[7]} handleClick={() => handleClick(7)} />
+                <Square value={squares[8]} handleClick={() => handleClick(8)} />
             </div>
 
         </>
-    )
-}
+    );
+};
 
-export default Board
+export default Board;
